@@ -1,0 +1,189 @@
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f8ff;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #8B4513; /* Brown */
+}
+
+#game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 2px;
+    border: 3px solid #A0522D; /* Sienna */
+    background-color: #deb887; /* BurlyWood */
+    width: 400px; /* 10 * 40px + 9 * 2px */
+    height: 400px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.square {
+    background-color: #f5deb3; /* Wheat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #d2b48c; /* Tan */
+    position: relative;
+    overflow: hidden;
+}
+
+.square.odd-row {
+    /* Numbers go left to right on odd rows (1-10, 21-30, etc.) */
+}
+
+.square.even-row {
+    /* Numbers go right to left on even rows (11-20, 31-40, etc.) */
+}
+
+.square span {
+    z-index: 1;
+}
+
+.snake, .ladder {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.5); /* Red for snakes */
+    z-index: 2;
+}
+
+.ladder {
+    background-color: rgba(0, 255, 0, 0.5); /* Green for ladders */
+}
+
+.player {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #4169E1; /* RoyalBlue */
+    border-radius: 50%;
+    z-index: 3;
+    transition: all 0.5s ease-out;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.player-controls {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#player-info {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #8B4513;
+}
+
+#roll-dice-btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: #FF8C00; /* DarkOrange */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#roll-dice-btn:hover {
+    background-color: #FF7F50; /* Coral */
+}
+
+#game-message {
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-height: 1.5em;
+    color: #dc143c;
+    margin-top: 10px;
+}
+
+#restart-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    background-color: #2E8B57; /* SeaGreen */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+#restart-button:hover {
+    background-color: #2E8B57;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #game-board {
+        width: 350px;
+        height: 350px;
+        grid-template-columns: repeat(10, 35px);
+        grid-template-rows: repeat(10, 35px);
+    }
+    .square {
+        font-size: 9px;
+    }
+    .player {
+        width: 18px;
+        height: 18px;
+    }
+    #player-info {
+        font-size: 1.1rem;
+    }
+    #roll-dice-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2rem;
+    }
+    #game-board {
+        width: 280px;
+        height: 280px;
+        grid-template-columns: repeat(10, 28px);
+        grid-template-rows: repeat(10, 28px);
+        gap: 1px;
+    }
+    .square {
+        font-size: 8px;
+    }
+    .player {
+        width: 15px;
+        height: 15px;
+    }
+    #player-info {
+        font-size: 1rem;
+    }
+    #roll-dice-btn {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    #restart-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

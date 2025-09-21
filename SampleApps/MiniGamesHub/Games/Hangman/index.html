@@ -1,0 +1,34 @@
+<!DOCTYPE html html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <h2>Hangman</h2>
+        <div id="hangman-drawing">
+            <svg width="200" height="250" viewBox="0 0 200 250">
+                <!-- Gallows parts -->
+                <line x1="50" y1="230" x2="150" y2="230" stroke="white" stroke-width="4"></line> <!-- Base -->
+                <line x1="100" y1="230" x2="100" y2="30" stroke="white" stroke-width="4"></line>  <!-- Pole -->
+                <line x1="100" y1="30" x2="150" y2="50" stroke="white" stroke-width="4"></line>   <!-- Rope -->
+                <line x1="150" y1="50" x2="150" y2="80" stroke="white" stroke-width="3"></line>   <!-- Head support -->
+                <!-- Head, Body, Arms, Legs will be drawn based on incorrect guesses -->
+            </svg>
+        </div>
+        <div id="word-display">
+            <!-- Word will be displayed here -->
+        </div>
+        <p id="guesses-left">Guesses Left: 10</p>
+        <div id="keyboard">
+            <!-- Keyboard buttons will be generated here -->
+        </div>
+        <p id="message"></p>
+        <button id="restart-button">Play Again</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

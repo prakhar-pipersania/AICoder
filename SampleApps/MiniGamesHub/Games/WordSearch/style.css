@@ -1,0 +1,177 @@
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1e1e2f;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+    color: #6a1b9a;
+}
+
+#game-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+#word-list {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    min-width: 200px;
+}
+
+#word-list h3 {
+    margin-top: 0;
+    color: #95a5a6;
+    border-bottom: 1px solid #7f8c8d;
+    padding-bottom: 10px;
+}
+
+#words {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.word-item {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.word-item.found {
+    color: #95a5a6;
+    text-decoration: line-through;
+}
+
+#grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#word-search-grid {
+    display: grid;
+    border: 2px solid #9b59b6;
+    background-color: #34495e;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.grid-cell {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease;
+    color: #ecf0f1;
+}
+
+.grid-cell.selected {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.grid-cell.partially-selected {
+    background-color: rgba(231, 76, 60, 0.5);
+}
+
+#message {
+    margin-top: 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    min-height: 1.5em;
+    color: #e74c3c;
+    text-align: center;
+}
+
+#restart-button {
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 25px;
+}
+
+#restart-button:hover {
+    background-color: #8e24aa;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    #game-area {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    #word-list {
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    #word-search-grid {
+        grid-template-columns: repeat(10, 30px);
+        grid-template-rows: repeat(10, 30px);
+    }
+    .grid-cell {
+        font-size: 1.2rem;
+        width: 30px;
+        height: 30px;
+    }
+    #word-list h3 {
+        font-size: 1.2rem;
+    }
+    .word-item {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 2rem;
+    }
+    #word-search-grid {
+        grid-template-columns: repeat(8, 28px);
+        grid-template-rows: repeat(8, 28px);
+    }
+    .grid-cell {
+        font-size: 1.1rem;
+        width: 28px;
+        height: 28px;
+    }
+    #word-list {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+    #message {
+        font-size: 1.1rem;
+    }
+    #restart-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
