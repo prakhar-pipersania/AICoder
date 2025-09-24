@@ -15,7 +15,11 @@ namespace AICoder
                 string? task = Console.ReadLine();
                 if (task == null || task.ToLower() == "exit") break;
 
-                await agent.HandleTask(task);
+                Console.Write("\nSend all files to LLM (Y/N)?: ");
+                string? getAllContext = Console.ReadLine();
+                bool includeContext = getAllContext.ToLower() == "y";
+
+                await agent.HandleTask(task, includeContext);
             }
         }
     }

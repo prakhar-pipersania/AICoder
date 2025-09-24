@@ -39,23 +39,25 @@ namespace AICoder.LLM
         public async Task<string> ExecutePrompt(string prompt)
         {
             string response = string.Empty;
-            response = provider == "openai" ? await GetOpenAIResponseAsync(prompt) : await GetGeminiResponseAsync(prompt);
+            response = provider == "azf-openai" ? await GetAzureFoundryOpenAIResponseAsync(prompt) : await GetGeminiResponseAsync(prompt);
             return response;
         }
 
-        public async Task<string> GetOpenAIResponseAsync(string userInput)
+        public async Task<string> GetAzureFoundryOpenAIResponseAsync(string userInput)
         {
-            var request = new { model, messages = new[] { new { role = "user", content = userInput } } };
+            var request = new { model, input = new[] { new { role = "user", content = userInput } } };
             string json = JsonSerializer.Serialize(request);
-            HttpRequestMessage httpReq = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/chat/completions");
+            HttpRequestMessage httpReq = new HttpRequestMessage(HttpMethod.Post, "https://c9h9gf-test-resource.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview");
             httpReq.Headers.Add("Authorization", $"Bearer {apiKey}");
             httpReq.Content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage resp = await client.SendAsync(httpReq);
             string respStr = await resp.Content.ReadAsStringAsync();
             using JsonDocument doc = JsonDocument.Parse(respStr);
-            var reply = doc.RootElement.GetProperty("choices")[0]
-                      .GetProperty("message")
-                      .GetProperty("content").GetString();
+            var reply = doc.RootElement
+                .GetProperty("output")[1]
+                .GetProperty("content")[0]
+                .GetProperty("text")
+                .GetString();
 
             return reply;
         }

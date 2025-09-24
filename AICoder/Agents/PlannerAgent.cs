@@ -13,13 +13,15 @@ namespace AICoder.Agents
             llm = new LLMProvider("Planner");
         }
 
-        public async Task<PlanResult> PlanTask(string task, string projectDoc)
+        public async Task<PlanResult> PlanTask(string task, string projectDoc, string context = "")
         {
             string prompt = $@"
                             You are a project planning assistant. A user wants to update their project with the following task:
 
                             TASK:
                             {task}
+
+                            {context}
 
                             PROJECT DOCUMENTATION:
                             {projectDoc}

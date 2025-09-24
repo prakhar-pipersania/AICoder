@@ -32,7 +32,7 @@ namespace AICoder.Agents
         {
             string prompt = @$"
                                 Task: {task}
-                                Files Context: {context}
+                                {context}
                                 Return only a flat JSON object in the following format, without markdown formatting, without code blocks, without explanations:
 
                                 {{
@@ -50,25 +50,25 @@ namespace AICoder.Agents
             {
                 result = JsonConvert.DeserializeObject<Dictionary<string, string>>(output)
                          ?? new Dictionary<string, string>();
+
+                // Save files & update documentation
+                foreach (var kv in result)
+                {
+                    fileOps.SaveFile(kv.Key, kv.Value);
+                    Console.WriteLine($"Saved: {kv.Key}");
+                }
+
+                // Delete files from plan
+                foreach (var file in plan.Delete)
+                {
+                    fileOps.DeleteFile(file);
+                    Console.WriteLine($"Deleted: {file}");
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error parsing JSON: {ex.Message}");
                 result = new Dictionary<string, string>();
-            }
-
-            // Save files & update documentation
-            foreach (var kv in result)
-            {
-                fileOps.SaveFile(kv.Key, kv.Value);
-                Console.WriteLine($"Saved: {kv.Key}");
-            }
-
-            // Delete files from plan
-            foreach (var file in plan.Delete)
-            {
-                fileOps.DeleteFile(file);
-                Console.WriteLine($"Deleted: {file}");
             }
 
             return result;
