@@ -51,6 +51,7 @@ namespace DevMind.Agents
             }
 
             // 3. Plan
+            _log.LogInformation("Loading/Creating documentation based on project...");
             string docs = await _docs.LoadDocumentationAsync(context);
             var planResponse = new PlanResult();
             planResponse = await _planner.PlanAsync(enhancedRequirement, docs, context, ct);
