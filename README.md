@@ -1,12 +1,12 @@
-# 📘 AlCoder – AI Coding Agent Framework
+# 📘 DevMind – AI Coding Agent Framework
 
-AlCoder is a modular AI-powered coding assistant that can **enhance, plan, generate, and maintain codebases** with deterministic project documentation.
+DevMind is a modular AI-powered coding assistant that can **enhance, plan, generate, and maintain codebases** with deterministic project documentation.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions to **AlCoder**! Whether you want to fix bugs, add features, improve documentation, or create new sample apps based on different Libraries/Framework — your help is appreciated.
+We welcome contributions to **DevMind**! Whether you want to fix bugs, add features, or improve documentation, — your help is appreciated.
 
 ### 🚀 How to Contribute
 
@@ -19,7 +19,6 @@ We welcome contributions to **AlCoder**! Whether you want to fix bugs, add featu
 
 * Add new **agents** (e.g., testing agent, UI agent).
 * Improve **documentation** (tutorials, examples, FAQs).
-* Create new **SampleApps** in the workspace and add you prompts in `Prompt.txt`.
 * Enhance the **DocsAgent** to produce richer project summaries.
 * Optimize **LLM provider integration** (add support for Deepseek, Anthropic, etc.).
 
@@ -51,7 +50,7 @@ We welcome contributions to **AlCoder**! Whether you want to fix bugs, add featu
 * **Example**
 
   * Planner → reasoning model (e.g., GPT-4, Gemini).
-  * Code generation → code-specialized model (e.g., CodeLlama).
+  * Code generation → code-specialized model (e.g., GPT-5).
   * Debugging → lightweight model (e.g., GPT-3.5, Gemini Flash - Lite).
 
 * **Pros**
@@ -75,10 +74,10 @@ We welcome contributions to **AlCoder**! Whether you want to fix bugs, add featu
 
 ## 🔹 Core Architecture
 
-### 1. **Orchestrator (AiAgent.cs)**
+### 1. **Orchestrator**
 
 * Entry point for all tasks.
-* Routes to Planner, CodeGen, Enhancer, or Docs agent.
+* Routes to Enhancer, Planner, CodeGen, or Docs agent.
 
 ### 2. **EnhancerAgent**
 
@@ -112,7 +111,7 @@ We welcome contributions to **AlCoder**! Whether you want to fix bugs, add featu
 * Handles different providers (Gemini, OpenAI, etc.).
 * Normalizes API requests and responses.
 
-### 7. **FileOps & Utility**
+### 7. **Services**
 
 * File read/write helpers.
 * Post-process generated code (strip markdown fences, normalize formatting).
@@ -160,65 +159,6 @@ When the project grows too large:
 
 ---
 
-## 🔹 Folder Structure
-
-```
-AlCoder
-│── Agents
-│   ├── AiAgent.cs
-│   ├── CodeGenAgent.cs
-│   ├── DocsAgent.cs
-│   ├── EnhancerAgent.cs
-│   └── PlannerAgent.cs
-│
-│── LLM
-│   └── LLMProvider.cs
-│
-│── Models
-│   └── PlanResult.cs
-│
-│── Services
-│   ├── FileOps.cs
-│   └── Utility.cs
-│
-│── appsettings.json
-│── Program.cs
-```
-
----
-
-## 🔹 Configuration (appsettings.json)
-
-```json
-{
-  "DefaultProvider": "gemini",
-  "Agents": {
-    "Enhancer": {
-      "Model": "gemini-2.5-flash-lite",
-      "API_KEY": "AIzaSyxxxxx",
-      "Provider": "gemini"
-    },
-    "Planner": {
-      "Model": "gemini-2.5-flash-lite",
-      "API_KEY": "AIzaSyxxxxx",
-      "Provider": "gemini"
-    },
-    "CodeGen": {
-      "Model": "gemini-2.5-flash",
-      "API_KEY": "AIzaSyxxxxx",
-      "Provider": "gemini"
-    },
-    "Docs": {
-      "Model": "gemini-2.5-flash-lite",
-      "API_KEY": "AIzaSyxxxxx",
-      "Provider": "gemini"
-    }
-  }
-}
-```
-
----
-
 ## 🔹 Challenges & Fixes
 
 | Challenge                                   | Fix                                     |
@@ -228,36 +168,3 @@ AlCoder
 | Documentation drift                         | Auto-update + allow manual corrections  |
 | Noisy RAG hits                              | Use doc-first + RAG fallback hybrid     |
 | Token/context limits in big projects        | Use RAG + chunking per class/function   |
-
----
-
-## 🔹 Working Sample Apps
-
-AlCoder includes a **`SampleApps` workspace** that demonstrates its ability to plan, generate, and enhance projects end-to-end.
-
-These apps are **generated using AlCoder itself**, with:
-
-* Basic features implemented in the first generation.
-* Minor enhancements applied in follow-up prompts.
-* Each app folder contains a `Prompt.txt` file showing the exact input prompts used for generation and improvements.
-
-### 📂 Available Sample Apps
-
-1. **.NET WebApi**
-
-   * Basic Web API skeleton with controllers, services, and dependency injection.
-   * Demonstrates CRUD setup and Swagger integration.
-
-2. **MiniGamesHub**
-
-   * Collection of simple C# mini-games (e.g., Tic-Tac-Toe, Snakes & Ladders).
-   * Showcases multi-class project planning and enhancement flow.
-
-3. **TodoApp**
-
-   * Classic to-do list application.
-   * Demonstrates persistence, filters, and incremental feature additions.
-
----
-
-✅ With this setup, AlCoder becomes a **self-maintaining AI coding agent** with modular agents, and transparent documentation.

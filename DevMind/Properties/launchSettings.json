@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "DevMind Runner": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "GEMINI_KEY": "AIzxxxx6jY",
+        "AZOPENAI_KEY": "9J7zxxxxUWXC"
+      }
+    }
+  }
+}
