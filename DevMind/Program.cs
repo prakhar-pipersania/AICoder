@@ -39,5 +39,5 @@ var app = builder.Build();
 
 var devMind = app.Services.GetService<DevMindWorker>();
 var logger = app.Services.GetService<ILogger<Program>>();
-logger.LogInformation("Welcome to DevMind!");
+logger?.LogInformation("Welcome to DevMind!");
 await devMind.Start();

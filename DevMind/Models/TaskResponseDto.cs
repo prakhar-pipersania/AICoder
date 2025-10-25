@@ -2,6 +2,7 @@ namespace DevMind.Models
 {
     public sealed class TaskResponseDto
     {
+        public string Response { get; set; }
         public PlanResult Plan { get; set; } = new PlanResult();
         public Dictionary<string, string> GeneratedFiles { get; set; } = new();
         public List<string> DeletedFiles { get; set; } = new();

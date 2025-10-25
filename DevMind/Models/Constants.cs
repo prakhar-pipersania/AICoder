@@ -2,6 +2,17 @@
 {
     public class Constants
     {
+        public static readonly int RetryCount = 3;
+
+        public static readonly string Checkpoints = ".checkpoints";
+
+        public enum ChatType
+        {
+            ASK,
+            AGENT,
+            RESTORE
+        }
+
         public static string[] AllowedExtensions = new[]
         {
             // General

@@ -32,6 +32,11 @@ namespace DevMind.Agents
             return newDoc;
         }
 
+        public bool DocumentationExistsAsync()
+        {
+            return _fileService.FileExists(_docsFileName);
+        }
+
         public async Task<string> GenerateReadmeAsync(string requirements, string docs, string planjson, string fileContext, CancellationToken ct = default)
         {
             string newDoc = await _llm.ExecutePromptAsync(_agentName, $"CONTEXT:\n {fileContext} REQUIREMENTS:\n{requirements} OLD DOCUMENTATION:\n {docs} PLAN JSON:\n {planjson}", ct);

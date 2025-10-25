@@ -1,6 +1,7 @@
 using DevMind.Interfaces;
 using DevMind.Models;
 using Microsoft.Extensions.Logging;
+using static DevMind.Models.Constants;
 
 namespace DevMind
 {
@@ -25,30 +26,49 @@ namespace DevMind
             var response = new TaskResponseDto();
             try
             {
+                _log.LogInformation("Enter the project folder path: ");
+                string? path = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(path))
+                {
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "workspace");
+                }
+                string fullPath = Path.GetFullPath(path);
+                _log.LogInformation($"Full path: {fullPath}");
+                _files.AddWorkspacePath(fullPath);
+
                 while (true)
                 {
-                    _log.LogInformation("Enter requirements (or 'exit'): ");
-                    string? task = Console.ReadLine();
-                    if (task == null || task.ToLower() == "exit") break;
-
-                    _log.LogInformation("Enhance the given requirements (Y/N)?: ");
-                    string? shouldEnhance = Console.ReadLine();
-                    var enhance = shouldEnhance.ToLower() == "y";
-
                     var includeContext = false;
-                    if (_files.EnumerateWorkspaceFiles().Any())
+                    var task = string.Empty;
+
+                    _log.LogInformation("Enter ChatType (ask, agent, restore or exit): ");
+                    string? type = Console.ReadLine();
+                    if (type.ToLower() == "exit") 
+                        break;
+                    var chatType = Enum.TryParse(type, true, out ChatType parsed) ? parsed : ChatType.ASK;
+
+                    if (chatType != ChatType.RESTORE)
                     {
-                        _log.LogInformation("Include all files context to LLM (Y/N)?: ");
-                        string? getAllContext = Console.ReadLine();
-                        includeContext = getAllContext.ToLower() != "n";
+                        _log.LogInformation("Enter " + (chatType == ChatType.AGENT ? "requirements": "query") + ": ");
+                        task = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(task)) 
+                            continue;
+
+                        if (_files.EnumerateWorkspaceFiles().Any())
+                        {
+                            _log.LogInformation("Include all files context to LLM (Y/N)?: ");
+                            string? getAllContext = Console.ReadLine();
+                            includeContext = getAllContext.ToLower() != "n";
+                        }
                     }
 
                     var request = new TaskRequestDto()
                     {
+                        Type = chatType,
                         IncludeContext = includeContext,
-                        Requirements = task,
-                        EnhanceRequirements = enhance
+                        Requirements = task
                     };
+
                     response = await _orchestrator.HandleTaskAsync(request);
                 }
             }
