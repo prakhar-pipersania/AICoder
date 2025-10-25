@@ -1,6 +1,6 @@
 # 📘 DevMind – AI Coding Agent Framework
 
-DevMind is a modular AI-powered coding assistant that can **enhance, plan, generate, and maintain codebases** with deterministic project documentation.
+DevMind is a modular AI-powered coding assistant agent that can **plan, generate, and maintain codebases** with deterministic project documentation. It also lets you ask questions directly about your codebase and supports checkpoints, allowing you to easily revert any changes made by the agent.
 
 ---
 
@@ -17,15 +17,15 @@ We welcome contributions to **DevMind**! Whether you want to fix bugs, add featu
 
 ### 📌 Contribution Ideas
 
-* Add new **agents** (e.g., testing agent, UI agent).
-* Improve **documentation** (tutorials, examples, FAQs).
-* Enhance the **DocsAgent** to produce richer project summaries.
+* Add new **agents** or workflows (e.g., testing agent, UI agent).
+* Improve **documentation** (tutorials, examples, FAQs) or enhance the **DocsAgent** to produce richer project summaries.
 * Optimize **LLM provider integration** (add support for Deepseek, Anthropic, etc.).
 
 ### 🛠 Development Setup
 
 * Clone repo & restore dependencies.
-* Run locally.
+* Add Keys (Azure OpenAI or Gemini) in launchSettings.json
+* Run, use and test locally.
 
 ---
 
@@ -77,11 +77,13 @@ We welcome contributions to **DevMind**! Whether you want to fix bugs, add featu
 ### 1. **Orchestrator**
 
 * Entry point for all tasks.
-* Routes to Enhancer, Planner, CodeGen, or Docs agent.
+* Routes to Query agent for user queries.
+* Routes to Planner, CodeGen, or Docs agent.
+* Restores checkpoint.
 
-### 2. **EnhancerAgent**
+### 2. **QueryAgent**
 
-* Improves user requirements.
+* Queries and responds to user based on documentation and implementation.
 
 ### 3. **PlannerAgent**
 
@@ -108,7 +110,7 @@ We welcome contributions to **DevMind**! Whether you want to fix bugs, add featu
 
 ### 6. **LLMProvider**
 
-* Handles different providers (Gemini, OpenAI, etc.).
+* Handles different providers (Gemini, Azure OpenAI, etc.).
 * Normalizes API requests and responses.
 
 ### 7. **Services**
@@ -148,7 +150,7 @@ We welcome contributions to **DevMind**! Whether you want to fix bugs, add featu
 
 ---
 
-### 🔹 Hybrid with RAG (For Large Projects) - Not Implementated
+### 🔹 Hybrid with RAG (For Large Projects) - Todo
 
 When the project grows too large:
 
